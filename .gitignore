@@ -1,0 +1,121 @@
+# ============================================
+# .gitignore untuk Aplikasi Fix Us
+# ============================================
+
+# ===== FILE KONFIGURASI SENSITIF =====
+# JANGAN UPLOAD INI KE GITHUB!
+config.php
+admin/config.php
+.env
+*.env
+
+# ===== FILE DEVELOPMENT & TESTING =====
+phpinfo_check.php
+generate_admin_password.php
+test*.php
+debug*.php
+
+# ===== FILE DOKUMENTASI (OPSIONAL) =====
+# Uncomment jika tidak ingin upload dokumentasi
+*.md
+!README.md
+CARA_LOGIN_ADMIN.md
+CONFIG_OPTIMIZATION.md
+PRODUCTION_CHECKLIST.md
+LAPORAN_AUDIT_PRESENTASI.md
+SECURITY_AUDIT_HOSTING.md
+FIX_ERROR_DONE.md
+FITUR_BARU.md
+FITUR_TUKANG.md
+README.txt
+READY_TO_HOSTING.txt
+GITHUB_UPLOAD_GUIDE.md
+GITHUB_QUICK_GUIDE.txt
+
+# ===== CLAUDE CODE SETTINGS =====
+.claude/
+
+# ===== DATABASE =====
+# JANGAN upload database!
+*.sql
+*.sqlite
+*.db
+db_backup/
+backups/
+database/
+db_migrations/
+
+# ===== FOLDER SISTEM =====
+.git/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===== LOG FILES =====
+*.log
+error.log
+access.log
+logs/
+
+# ===== TEMPORARY FILES =====
+tmp/
+temp/
+cache/
+*.tmp
+*.cache
+*.swp
+*.swo
+*~
+
+# ===== SESSION FILES =====
+sessions/
+*.sess
+
+# ===== UPLOAD FILES (jika ada) =====
+uploads/
+images/uploads/
+files/
+
+# ===== NODE MODULES (jika pakai Node.js) =====
+node_modules/
+package-lock.json
+
+# ===== COMPOSER (jika pakai Composer) =====
+vendor/
+composer.lock
+
+# ===== OS FILES =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== IDE FILES =====
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# ===== BACKUP FILES =====
+*.bak
+*.backup
+*~
+
+# ===== WINDOWS RESERVED NAMES =====
+nul
+NUL
+CON
+PRN
+AUX
+
+# ============================================
+# CATATAN PENTING:
+# - config.php WAJIB di-gitignore (password DB!)
+# - Buat config.example.php untuk template
+# - Upload .sql ke tempat terpisah (private)
+# ============================================

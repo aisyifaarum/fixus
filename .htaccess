@@ -1,0 +1,71 @@
+# Fix Us - Apache Configuration
+
+# Prevent access to sensitive files
+<FilesMatch "(generate_admin_password\.php|CARA_LOGIN_ADMIN\.md|\.env|config\.php)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to generate_admin_password.php only from localhost (untuk testing)
+<Files "generate_admin_password.php">
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+</Files>
+
+# Protect .git directory and database migration files
+RedirectMatch 403 /\.git
+RedirectMatch 403 /db_migrations
+
+# Enable error reporting (only for development - DISABLE in production)
+# php_flag display_errors On
+# php_value error_reporting E_ALL
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # XSS Protection
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Prevent MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Cache static files
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
+
+# Custom error pages (optional - buat nanti jika perlu)
+# ErrorDocument 404 /fixus/404.php
+# ErrorDocument 500 /fixus/500.php
+
+# Protect against SQL injection
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block SQL injection attempts
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
