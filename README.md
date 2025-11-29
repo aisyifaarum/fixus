@@ -1,4 +1,4 @@
-# 🔧 Fix Us - Aplikasi Booking Tukang Servis
+# 🔧 Fix Us - Solusi Perbaikan untuk Anak Kos
 
 ![PHP](https://img.shields.io/badge/PHP-8.2-blue)
 ![MySQL](https://img.shields.io/badge/MySQL-5.7-orange)
@@ -9,19 +9,20 @@
 ## 📋 Identitas Project
 
 ### **Nama Project:**
-Fix Us - Aplikasi Booking Tukang Servis Online
+Fix Us - Solusi Perbaikan untuk Anak Kos
 
 ### **Nama Kelompok:**
-[ISI NAMA KELOMPOK ANDA]
+[KELOMPOK 7]
 
 ### **Anggota Kelompok:**
-1. [Nama Lengkap] - [NIM]
-2. [Nama Lengkap] - [NIM]
-3. [Nama Lengkap] - [NIM]
+1. [Aisyifa Arum] - [701230067]
+2. [Diah Novinda] - [701230061]
+3. [Icha Maretha] - [701230066]
+4. [Nabila Putri Ramadani - [71230070]]
 <!-- Tambahkan anggota sesuai kebutuhan -->
 
 ### **Dosen Pengampu:**
-[Nama Dosen], [Gelar]
+[Dila Nurlaila], [M.Kom]
 Mata Kuliah: Rekayasa Perangkat Lunak
 
 ---
