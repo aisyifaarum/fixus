@@ -118,7 +118,7 @@ Prerequisites:
 
 A. Clone Repository
 ```bash
-git clone https://github.com/[username]/fixus.git
+git clone https://github.com/aisyifaarumfixus.git
 cd fixus
 ```
 
