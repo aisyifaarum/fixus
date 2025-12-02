@@ -40,8 +40,8 @@ if (!$pesanan) {
     exit();
 }
 
-// Get payment info if exists
-$stmt_payment = $conn->prepare("SELECT * FROM pembayaran WHERE booking_id = ? ORDER BY created_at DESC LIMIT 1");
+// Get payment info from virtual_account if exists
+$stmt_payment = $conn->prepare("SELECT * FROM virtual_account WHERE id_pesanan = ? ORDER BY tanggal_dibuat DESC LIMIT 1");
 $stmt_payment->bind_param("i", $id_pesanan);
 $stmt_payment->execute();
 $payment = $stmt_payment->get_result()->fetch_assoc();
@@ -389,7 +389,7 @@ $stmt_review->close();
                     <div class="info-item">
                         <div class="info-label">Metode Pembayaran</div>
                         <div class="info-value">
-                            <?php echo strtoupper($payment['payment_method'] ?? 'qris') === 'VA' || ($payment['payment_method'] ?? '') === 'va' ? 'Virtual Account' : strtoupper($payment['payment_method'] ?? 'QRIS'); ?>
+                            Transfer Bank (Virtual Account)
                         </div>
                     </div>
                     <div class="info-item">
@@ -402,29 +402,36 @@ $stmt_review->close();
                                 'expired' => '⏰ Kedaluwarsa',
                                 'failed' => '❌ Gagal'
                             ];
-                            echo $payment_status[$payment['status']];
+                            $status = $payment['status_pembayaran'] ?? 'pending';
+                            echo isset($payment_status[$status]) ? $payment_status[$status] : '⏳ Menunggu';
                             ?>
                         </div>
                     </div>
-                    <?php if ($payment['paid_at']): ?>
+                    <?php if (isset($payment['tanggal_bayar']) && $payment['tanggal_bayar']): ?>
                     <div class="info-item">
                         <div class="info-label">Dibayar Pada</div>
                         <div class="info-value">
-                            <?php echo date('d M Y, H:i', strtotime($payment['paid_at'])); ?>
+                            <?php echo date('d M Y, H:i', strtotime($payment['tanggal_bayar'])); ?>
                         </div>
                     </div>
                     <?php endif; ?>
-                    <?php if (isset($payment['payment_method']) && $payment['payment_method'] === 'va'): ?>
+                    <?php if (isset($payment['bank']) && $payment['bank']): ?>
                     <div class="info-item">
                         <div class="info-label">Bank</div>
                         <div class="info-value">
-                            <?php echo htmlspecialchars($payment['va_bank'] ?? ''); ?>
+                            <?php echo htmlspecialchars($payment['bank']); ?>
                         </div>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Nomor VA</div>
+                        <div class="info-label">Nomor Rekening</div>
                         <div class="info-value">
-                            <?php echo htmlspecialchars($payment['va_number'] ?? ''); ?>
+                            <?php echo htmlspecialchars($payment['nomor_rekening'] ?? ''); ?>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Atas Nama</div>
+                        <div class="info-value">
+                            <?php echo htmlspecialchars($payment['nama_penerima'] ?? ''); ?>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -464,12 +471,6 @@ $stmt_review->close();
                                 ❌ Batalkan Pesanan
                             </button>
                         </form>
-                    <?php endif; ?>
-
-                    <?php if ($pesanan['status'] == 'selesai' && $pesanan['total_biaya'] > 0 && (!$payment || $payment['status'] != 'paid')): ?>
-                        <a href="pay.php?id=<?php echo $id_pesanan; ?>" class="btn btn-success">
-                            💳 Bayar via Virtual Account
-                        </a>
                     <?php endif; ?>
                 <?php endif; ?>
 

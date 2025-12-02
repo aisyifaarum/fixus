@@ -288,6 +288,11 @@ $is_expired = strtotime($pesanan['tanggal_expired']) < time();
             transform: translateY(-2px);
         }
 
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed !important;
+        }
+
         .btn-secondary {
             background: #6c757d;
             color: white;
@@ -415,7 +420,7 @@ $is_expired = strtotime($pesanan['tanggal_expired']) < time();
             <?php endif; ?>
 
             <div class="btn-container">
-                <button type="button" class="btn btn-primary" onclick="checkPaymentStatus()">✓ Cek Status Pembayaran</button>
+                <button type="button" id="checkBtn" class="btn btn-primary" onclick="manualCheckPayment()">✓ Cek Status Pembayaran</button>
                 <a href="pesanan-saya.php" class="btn btn-secondary">← Kembali ke Pesanan</a>
             </div>
         </div>
@@ -430,6 +435,28 @@ $is_expired = strtotime($pesanan['tanggal_expired']) < time();
     <script>
         // Auto-check payment status every 5 seconds
         let statusCheckInterval = setInterval(checkPaymentStatus, 5000);
+
+        function manualCheckPayment() {
+            const btn = document.getElementById('checkBtn');
+            const originalText = btn.innerHTML;
+
+            // Disable button and show loading state
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Memeriksa...';
+            btn.style.opacity = '0.7';
+            btn.style.cursor = 'not-allowed';
+
+            // Call the check function
+            checkPaymentStatus();
+
+            // Re-enable button after 2 seconds
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }, 2000);
+        }
 
         function checkPaymentStatus() {
             document.getElementById('payment-status').style.display = 'block';

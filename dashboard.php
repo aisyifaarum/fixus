@@ -35,7 +35,7 @@ if ($user_type == 'konsumen') {
                                     WHERE p.id_konsumen = ?
                                     AND p.status = 'selesai'
                                     AND p.total_biaya > 0
-                                    AND (va.status_pembayaran IS NULL OR va.status_pembayaran != 'lunas')");
+                                    AND (va.status_pembayaran IS NULL OR va.status_pembayaran != 'paid')");
     $stmt_unpaid->bind_param("i", $user_id);
     $stmt_unpaid->execute();
     $unpaid_orders = $stmt_unpaid->get_result()->fetch_assoc()['count'];

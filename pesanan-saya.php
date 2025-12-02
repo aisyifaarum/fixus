@@ -410,14 +410,6 @@ $result = $stmt->get_result();
                             </form>
                         <?php endif; ?>
 
-                        <?php if ($pesanan['total_biaya'] > 0): ?>
-                            <?php if (!$payment || $payment['status'] != 'paid'): ?>
-                                <a href="pay.php?id=<?php echo $pesanan['id_pesanan']; ?>" class="btn" style="background: #28a745; color: white; padding: 8px 15px; border: none; border-radius: 5px; text-decoration: none; display: inline-flex; align-items: center;">🔖 Bayar via Virtual Account</a>
-                            <?php else: ?>
-                                <span class="btn" style="background: #6c757d; color: white; padding: 8px 15px; border: none; border-radius: 5px;">✓ Sudah Dibayar</span>
-                            <?php endif; ?>
-                        <?php endif; ?>
-
                         <a href="detail-pesanan.php?id=<?php echo $pesanan['id_pesanan']; ?>" class="btn" style="background: #667eea; color: white; padding: 8px 15px; border: none; border-radius: 5px; text-decoration: none;">Detail</a>
                     </div>
 
