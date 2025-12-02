@@ -143,10 +143,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s;
         }
 
         .back-link:hover {
-            color: #5568d3;
+            color: #764ba2;
+            transform: translateX(-5px);
         }
     </style>
 </head>
