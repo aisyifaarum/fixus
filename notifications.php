@@ -245,7 +245,8 @@ $success = isset($_GET['msg']) && $_GET['msg'] == 'all_read' ? 'Semua notifikasi
         }
 
         .back-link:hover {
-            color: #5568d3;
+            color: #764ba2;
+            transform: translateX(-5px);
         }
     </style>
 </head>
