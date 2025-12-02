@@ -29,23 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
     $harga_per_jam = floatval($_POST['harga_per_jam']);
 
-    // Jadwal kerja dalam format JSON
-    $jadwal = [
-        'senin' => isset($_POST['senin']) ? $_POST['senin'] : [],
-        'selasa' => isset($_POST['selasa']) ? $_POST['selasa'] : [],
-        'rabu' => isset($_POST['rabu']) ? $_POST['rabu'] : [],
-        'kamis' => isset($_POST['kamis']) ? $_POST['kamis'] : [],
-        'jumat' => isset($_POST['jumat']) ? $_POST['jumat'] : [],
-        'sabtu' => isset($_POST['sabtu']) ? $_POST['sabtu'] : [],
-        'minggu' => isset($_POST['minggu']) ? $_POST['minggu'] : []
-    ];
-    $jadwal_kerja = json_encode($jadwal);
-
     if (empty($nama) || empty($no_telepon) || empty($keahlian)) {
         $error = 'Nama, no telepon, dan keahlian wajib diisi!';
     } else {
-        $stmt = $conn->prepare("UPDATE tukang SET nama = ?, no_telepon = ?, alamat = ?, keahlian = ?, kategori = ?, lokasi = ?, deskripsi = ?, harga_per_jam = ?, jadwal_kerja = ? WHERE id_tukang = ?");
-        $stmt->bind_param("sssssssdsi", $nama, $no_telepon, $alamat, $keahlian, $kategori, $lokasi, $deskripsi, $harga_per_jam, $jadwal_kerja, $id_tukang);
+        $stmt = $conn->prepare("UPDATE tukang SET nama = ?, no_telepon = ?, alamat = ?, keahlian = ?, kategori = ?, lokasi = ?, deskripsi = ?, harga_per_jam = ? WHERE id_tukang = ?");
+        $stmt->bind_param("sssssssdi", $nama, $no_telepon, $alamat, $keahlian, $kategori, $lokasi, $deskripsi, $harga_per_jam, $id_tukang);
 
         if ($stmt->execute()) {
             $success = 'Profil berhasil diperbarui!';
@@ -63,9 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->close();
     }
 }
-
-// Parse jadwal kerja
-$jadwal_data = !empty($tukang['jadwal_kerja']) ? json_decode($tukang['jadwal_kerja'], true) : [];
 ?>
 
 <!DOCTYPE html>
@@ -132,45 +117,6 @@ $jadwal_data = !empty($tukang['jadwal_kerja']) ? json_decode($tukang['jadwal_ker
 
         .form-grid-full {
             grid-column: 1 / -1;
-        }
-
-        .jadwal-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        .jadwal-day {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-        }
-
-        .jadwal-day label {
-            min-width: 80px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .jadwal-time {
-            display: flex;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .time-input {
-            flex: 1;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .btn-save {
@@ -308,55 +254,11 @@ $jadwal_data = !empty($tukang['jadwal_kerja']) ? json_decode($tukang['jadwal_ker
                     </div>
                 </div>
 
-                <div class="jadwal-section">
-                    <h2 style="color: #333; margin-bottom: 20px;">📅 Jadwal Kerja</h2>
-                    <p style="color: #666; margin-bottom: 20px;">Atur jadwal ketersediaan Anda untuk setiap hari</p>
-
-                    <?php
-                    $hari = ['senin' => 'Senin', 'selasa' => 'Selasa', 'rabu' => 'Rabu', 'kamis' => 'Kamis', 'jumat' => 'Jumat', 'sabtu' => 'Sabtu', 'minggu' => 'Minggu'];
-                    foreach ($hari as $key => $label):
-                        $is_available = isset($jadwal_data[$key]) && !empty($jadwal_data[$key]);
-                        $jam_mulai = $is_available && isset($jadwal_data[$key]['mulai']) ? $jadwal_data[$key]['mulai'] : '08:00';
-                        $jam_selesai = $is_available && isset($jadwal_data[$key]['selesai']) ? $jadwal_data[$key]['selesai'] : '17:00';
-                    ?>
-                    <div class="jadwal-day">
-                        <div class="checkbox-wrapper">
-                            <input type="checkbox" id="<?php echo $key; ?>_aktif" class="day-toggle" data-day="<?php echo $key; ?>" <?php echo $is_available ? 'checked' : ''; ?>>
-                            <label for="<?php echo $key; ?>_aktif" style="min-width: 80px;"><?php echo $label; ?></label>
-                        </div>
-                        <div class="jadwal-time" id="<?php echo $key; ?>_time" style="<?php echo !$is_available ? 'display: none;' : ''; ?>">
-                            <div class="time-input">
-                                <input type="time" name="<?php echo $key; ?>[mulai]" value="<?php echo $jam_mulai; ?>">
-                            </div>
-                            <span style="color: #666;">s/d</span>
-                            <div class="time-input">
-                                <input type="time" name="<?php echo $key; ?>[selesai]" value="<?php echo $jam_selesai; ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <div style="text-align: center;">
+                <div style="text-align: center; margin-top: 30px;">
                     <button type="submit" class="btn-save">💾 Simpan Perubahan</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-        // Toggle jadwal kerja visibility
-        document.querySelectorAll('.day-toggle').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const day = this.dataset.day;
-                const timeSection = document.getElementById(day + '_time');
-                if (this.checked) {
-                    timeSection.style.display = 'flex';
-                } else {
-                    timeSection.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
