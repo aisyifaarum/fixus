@@ -296,9 +296,15 @@ $stmt_stats->close();
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #667eea;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            color: #e0e0e0;
+            transform: translateX(-5px);
         }
     </style>
 </head>
