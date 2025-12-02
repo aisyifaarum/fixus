@@ -470,12 +470,6 @@ $stmt_review->close();
                         <a href="pay.php?id=<?php echo $id_pesanan; ?>" class="btn btn-success">
                             💳 Bayar via Virtual Account
                         </a>
-                        &nbsp;
-                        <form method="POST" action="create_manual_va.php" style="display:inline; margin:0;">
-                            <?php echo csrfField(); ?>
-                            <input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>">
-                            <button type="submit" class="btn btn-primary" style="background:#ffb74d; border:none; padding:8px 12px;">🏦 Bayar Manual (Transfer)</button>
-                        </form>
                     <?php endif; ?>
                 <?php endif; ?>
 
