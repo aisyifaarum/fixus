@@ -28,12 +28,12 @@ if ($result->num_rows == 0) {
 
 $tukang = $result->fetch_assoc();
 
-// Get ulasan
-$ulasan_query = "SELECT u.*, k.nama as nama_konsumen 
-                 FROM ulasan u 
-                 JOIN konsumen k ON u.id_konsumen = k.id_konsumen 
-                 WHERE u.id_tukang = ? 
-                 ORDER BY u.tanggal_ulasan DESC 
+// Get reviews
+$ulasan_query = "SELECT r.*, k.nama as nama_konsumen
+                 FROM reviews r
+                 JOIN konsumen k ON r.konsumen_id = k.id_konsumen
+                 WHERE r.tukang_id = ?
+                 ORDER BY r.created_at DESC
                  LIMIT 5";
 $stmt_ulasan = $conn->prepare($ulasan_query);
 $stmt_ulasan->bind_param("i", $id_tukang);
@@ -405,10 +405,10 @@ $ulasan_result = $stmt_ulasan->get_result();
                                     </span>
                                 </div>
                                 <div class="ulasan-text">
-                                    <?php echo htmlspecialchars($ulasan['komentar']); ?>
+                                    <?php echo htmlspecialchars($ulasan['review']); ?>
                                 </div>
                                 <div class="ulasan-date">
-                                    <?php echo date('d M Y, H:i', strtotime($ulasan['tanggal_ulasan'])); ?>
+                                    <?php echo date('d M Y, H:i', strtotime($ulasan['created_at'])); ?>
                                 </div>
                             </div>
                         <?php endwhile; ?>

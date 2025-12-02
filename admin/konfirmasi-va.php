@@ -25,12 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param("i", $id_va);
 
             if ($stmt->execute()) {
-                // Update status pesanan jadi diterima (sudah dibayar)
-                $stmt2 = $conn->prepare("UPDATE pesanan p INNER JOIN virtual_account va ON p.id_pesanan = va.id_pesanan SET p.status = 'diterima' WHERE va.id_va = ?");
-                $stmt2->bind_param("i", $id_va);
-                $stmt2->execute();
-                $stmt2->close();
-
                 $success = 'Pembayaran berhasil dikonfirmasi!';
             } else {
                 $error = 'Gagal mengkonfirmasi pembayaran!';
@@ -252,6 +246,152 @@ $va_result = $conn->query($va_query);
 
         .detail-info strong {
             color: #333;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .container {
+                margin-left: 0;
+                padding: 70px 15px 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .stat-card h3 {
+                font-size: 13px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 -15px;
+                padding: 0 15px;
+            }
+
+            table {
+                min-width: 800px;
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px !important;
+            }
+
+            .va-number {
+                font-size: 12px;
+            }
+
+            .detail-info {
+                font-size: 11px;
+            }
+
+            .status-badge {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            .btn-confirm {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .btn-back {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .sidebar-header h2 {
+                font-size: 20px;
+            }
+
+            .sidebar-menu a {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>

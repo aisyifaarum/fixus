@@ -18,7 +18,7 @@ Fix Us - Solusi Perbaikan untuk Anak Kos
 1. [Aisyifa Arum] - [701230067]
 2. [Diah Novinda] - [701230061]
 3. [Icha Maretha] - [701230066]
-4. [Nabila Putri Ramadani - [71230070]]
+4. [Nabila Putri Ramadani - [701230070]]
 <!-- Tambahkan anggota sesuai kebutuhan -->
 
 ### **Dosen Pengampu:**

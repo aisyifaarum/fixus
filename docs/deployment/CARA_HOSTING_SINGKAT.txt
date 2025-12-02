@@ -1,0 +1,110 @@
+================================================================================
+              CARA HOSTING FIX US DI INFINITYFREE
+                    (Versi Singkat - 30 Menit)
+================================================================================
+
+🚀 LANGKAH CEPAT
+================================================================================
+
+1. DAFTAR INFINITYFREE
+   → Buka: https://infinityfree.net/
+   → Sign Up dengan email
+   → Verifikasi email
+
+2. BUAT WEBSITE
+   → Create Account
+   → Pilih subdomain: fixus.infinityfreeapp.com
+   → Tunggu 5 menit sampai Active
+
+3. UPLOAD FILE
+   → Control Panel → File Manager
+   → Masuk folder htdocs/
+   → Download ZIP dari GitHub: https://github.com/aisyifaarum/fixus
+   → Upload & extract semua file ke htdocs/
+   ⚠️ PENTING: File harus LANGSUNG di htdocs/, BUKAN htdocs/fixus/!
+
+4. BUAT DATABASE
+   → MySQL Databases
+   → Create Database: fixus_db
+   → Create User: fixus_user (set password)
+   → Add User to Database (ALL PRIVILEGES)
+   📝 CATAT: Hostname, Database name, Username, Password!
+
+5. IMPORT DATABASE
+   → phpMyAdmin
+   → Pilih database
+   → Import → Upload fixus_db.sql
+   → Go
+
+6. BUAT CONFIG.PHP
+   → File Manager → htdocs/
+   → New File: config.php
+   → Copy dari config.example.php
+   → Edit database info:
+     DB_HOST = sql1XX.infinityfree.com (lihat di MySQL Databases)
+     DB_USER = epiz_XXXXXXXX_fixus_user
+     DB_PASS = password_kamu
+     DB_NAME = epiz_XXXXXXXX_fixus_db
+
+7. BUAT ADMIN/CONFIG.PHP
+   → File Manager → htdocs/admin/
+   → New File: config.php
+   → Copy dari admin/config.example.php
+   → Edit database info (SAMA dengan step 6)
+
+8. TEST!
+   → Buka: https://fixus.infinityfreeapp.com/
+   → Login admin: admin / admin123
+   → Test register, booking, pembayaran
+
+
+================================================================================
+📋 INFO DATABASE (Lihat di cPanel → MySQL Databases)
+================================================================================
+
+Hostname : sql1XX.infinityfree.com (contoh: sql108.infinityfree.com)
+Database : epiz_XXXXXXXX_fixus_db
+Username : epiz_XXXXXXXX_fixus_user
+Password : [password yang kamu buat]
+
+
+================================================================================
+📸 JANGAN LUPA!
+================================================================================
+
+Setelah hosting berhasil:
+
+1. Ambil 3 SCREENSHOT dari HOSTING (bukan localhost!):
+   - dashboard-konsumen.png
+   - dashboard-admin.png
+   - pesanan-tukang.png
+
+2. Update README.md dengan URL deployment
+
+3. Upload ke GitHub:
+   git add docs/screenshots/*.png README.md
+   git commit -m "Add deployment and screenshots"
+   git push
+
+
+================================================================================
+🐛 ERROR? CEK INI!
+================================================================================
+
+Connection failed
+→ Cek config.php, DB_HOST harus sql1XX.infinityfree.com
+
+404 Not Found
+→ File harus di htdocs/, bukan htdocs/fixus/
+
+Table doesn't exist
+→ Import ulang fixus_db.sql
+
+
+================================================================================
+                  SELESAI! 🎉
+       URL: https://fixus.infinityfreeapp.com/
+
+   Panduan lengkap: PANDUAN_INFINITYFREE.md
+   Checklist: CHECKLIST_DEPLOY.txt
+================================================================================

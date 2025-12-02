@@ -1,7 +1,14 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
-<div class="sidebar">
+
+<!-- Mobile Menu Button -->
+<button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleSidebar()">☰</button>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <h2>Fix Us Admin</h2>
     </div>
@@ -18,3 +25,24 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <li><a href="logout.php">Logout</a></li>
     </ul>
 </div>
+
+<script>
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+}
+
+// Close sidebar when menu item clicked on mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const menuLinks = document.querySelectorAll('.sidebar-menu a');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        });
+    });
+});
+</script>
