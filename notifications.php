@@ -238,14 +238,14 @@ $success = isset($_GET['msg']) && $_GET['msg'] == 'all_read' ? 'Semua notifikasi
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #667eea;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
         }
 
         .back-link:hover {
-            color: #764ba2;
+            color: #e0e0e0;
             transform: translateX(-5px);
         }
     </style>
