@@ -28,8 +28,14 @@ if ($user_type == 'konsumen') {
     $pending_orders = $stmt_pending->get_result()->fetch_assoc()['count'];
     $stmt_pending->close();
 
-    // Count unpaid orders
-    $stmt_unpaid = $conn->prepare("SELECT COUNT(DISTINCT p.id_pesanan) as count FROM pesanan p LEFT JOIN pembayaran pay ON p.id_pesanan = pay.booking_id AND pay.status = 'paid' WHERE p.id_konsumen = ? AND p.status = 'selesai' AND p.total_biaya > 0 AND pay.id_payment IS NULL");
+    // Count unpaid orders (using virtual_account table)
+    $stmt_unpaid = $conn->prepare("SELECT COUNT(DISTINCT p.id_pesanan) as count
+                                    FROM pesanan p
+                                    LEFT JOIN virtual_account va ON p.id_pesanan = va.id_pesanan
+                                    WHERE p.id_konsumen = ?
+                                    AND p.status = 'selesai'
+                                    AND p.total_biaya > 0
+                                    AND (va.status_pembayaran IS NULL OR va.status_pembayaran != 'lunas')");
     $stmt_unpaid->bind_param("i", $user_id);
     $stmt_unpaid->execute();
     $unpaid_orders = $stmt_unpaid->get_result()->fetch_assoc()['count'];
