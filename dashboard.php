@@ -189,6 +189,11 @@ if ($user_type == 'konsumen') {
                         <h3 style="color: #f57c00; margin-bottom: 10px;">⭐ Ulasan</h3>
                         <p style="color: #666; font-size: 14px; margin: 0;">Berikan ulasan untuk pesanan yang sudah selesai</p>
                     </a>
+
+                    <a href="profil-saya-konsumen.php" class="menu-card" style="background: #fce4ec;">
+                        <h3 style="color: #c2185b; margin-bottom: 10px;">👤 Profil Saya</h3>
+                        <p style="color: #666; font-size: 14px; margin: 0;">Kelola informasi profil dan data pribadi Anda</p>
+                    </a>
                 </div>
             <?php else: ?>
                 <h2 style="color: #764ba2; margin-bottom: 20px;">Dashboard Tukang</h2>
