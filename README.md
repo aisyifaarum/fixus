@@ -17,7 +17,7 @@ Anggota Kelompok:
 2. [Diah Novinda] - [701230061]
 3. [Icha Maretha] - [701230066]
 4. [Nabila Putri Ramadani - [701230070]]
-<!-- Tambahkan anggota sesuai kebutuhan -->
+
 
 Dosen Pengampu:Dila Nurlaila, M.Kom
 
@@ -27,8 +27,8 @@ Mata Kuliah: Rekayasa Perangkat Lunak
 
 📖 Deskripsi Singkat
 
-Fix Us adalah aplikasi berbasis web yang membantu anak kos menemukan tukang untuk memperbaiki masalah sederhana seperti listrik, kipas angin, AC,dan lain-lain. Terdapat dua pengguna utama: konsumen (anak kos) dan tukang. Konsumen dapat registrasi, memesan jasa, membayar via QRIS, dan memberi ulasan. Tukang bisa mengelola profil, menerima pesanan, dan memperbarui status pekerjaan. Fix Us mempermudah anak kos mencari bantuan perbaikan dengan cepat dan praktis.  
-
+Fix Us adalah aplikasi berbasis web yang membantu anak kos menemukan tukang untuk memperbaiki masalah sederhana seperti listrik, kipas angin, AC,dan lain-lain. Terdapat dua pengguna utama: konsumen (anak kos) dan tukang. Konsumen dapat registrasi, memesan jasa, membayar via transfer Bank, dan memberi ulasan. Tukang bisa mengelola profil, menerima pesanan, dan memperbarui status pekerjaan. Fix Us mempermudah anak kos mencari bantuan perbaikan dengan cepat dan praktis.  
+ 
 
 ---
 
@@ -84,6 +84,7 @@ Security:
 - ⏳ Menunggu harga dari tukang (harga ditentukan setelah selesai)
 - ⭐ Review & rating tukang
 - 🔔 Notifikasi real-time
+- 👤 Profil & portfolio
 - 📱 Responsive design
 
 🔧 Untuk Tukang:
@@ -216,7 +217,7 @@ Silakan register di halaman `/register.php`
 
 <!-- Isi setelah deploy -->
 - Demo Live: [URL Deployment Anda]
-- Video Demo: [Link Video YouTube/Google Drive]
+- Video Demo: [https://youtu.be/TGO5RyIObvc]
 
 ---
 
@@ -231,7 +232,6 @@ Dashboard Admin:
 Pesanan Tukang:
 ![Pesanan Tukang](docs/screenshots/pesanan-tukang.png)
 
-<!-- Tambahkan screenshot ke folder docs/screenshots/ -->
 
 ---
 
