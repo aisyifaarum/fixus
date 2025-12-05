@@ -216,7 +216,7 @@ Silakan register di halaman `/register.php`
 🔗 Link Deployment
 
 <!-- Isi setelah deploy -->
-- Demo Live: [URL Deployment Anda]
+- Demo Live: [https://fixus.whoisrzki.id/]
 - Video Demo: [https://youtu.be/TGO5RyIObvc]
 
 ---
